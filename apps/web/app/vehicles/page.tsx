@@ -1,134 +1,122 @@
 import { getVehicleBrands, vehicles } from '@xedan/shared';
-import { formatPrice, statusLabel } from '../utils';
+import { SiteHeader } from '../components/SiteHeader';
+import { VehicleCard } from '../components/VehicleCard';
 
 export default function VehiclesPage() {
   const brands = getVehicleBrands();
   const availableCount = vehicles.filter((vehicle) => vehicle.status === 'available').length;
+  const averageScore = Math.round(
+    vehicles.reduce((total, vehicle) => total + vehicle.inspection.score, 0) /
+      vehicles.length,
+  );
 
   return (
     <main>
-      <header className="border-b border-line bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <a href="/" className="text-lg font-bold text-ink">
-            Xe Dan Voi Dan
-          </a>
-          <nav className="flex items-center gap-5 text-sm font-semibold text-ink">
-            <a href="/vehicles">Tim xe</a>
-            <a className="rounded-md bg-ink px-4 py-2 text-white" href="/sell">
-              Ban xe
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
-      <section className="border-b border-line bg-sky">
-        <div className="mx-auto max-w-7xl px-5 py-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-mint">
-            {availableCount} xe san sang giao dich
-          </p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-tight text-ink md:text-5xl">
-            Danh sach xe da kiem dinh, co ho so ro rang.
-          </h1>
-          <div className="mt-8 grid gap-3 rounded-md border border-line bg-white p-4 shadow-soft lg:grid-cols-[1fr_180px_180px_180px_auto]">
-            <input
-              className="rounded-md border border-line px-4 py-3 text-sm outline-none focus:border-mint"
-              placeholder="Tim theo hang, dong xe"
-            />
-            <select className="rounded-md border border-line px-4 py-3 text-sm outline-none focus:border-mint">
-              <option>Hang xe</option>
-              {brands.map((brand) => (
-                <option key={brand}>{brand}</option>
-              ))}
-            </select>
-            <select className="rounded-md border border-line px-4 py-3 text-sm outline-none focus:border-mint">
-              <option>Khoang gia</option>
-              <option>Duoi 500 trieu</option>
-              <option>500 - 700 trieu</option>
-              <option>Tren 700 trieu</option>
-            </select>
-            <select className="rounded-md border border-line px-4 py-3 text-sm outline-none focus:border-mint">
-              <option>Nam san xuat</option>
-              <option>Tu 2022</option>
-              <option>2020 - 2021</option>
-              <option>Truoc 2020</option>
-            </select>
-            <button className="rounded-md bg-mint px-6 py-3 text-sm font-bold text-white">
-              Loc xe
-            </button>
+      <section className="border-b border-line bg-[#f2f8f7]">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <p className="text-sm font-black uppercase tracking-wide text-mint">
+              {availableCount} xe san sang giao dich
+            </p>
+            <h1 className="mt-3 text-5xl font-black leading-tight text-ink md:text-6xl">
+              Tim xe da co nguoi kiem tra giup ban.
+            </h1>
+          </div>
+          <div className="rounded-md border border-line bg-white p-5 shadow-soft">
+            <div className="grid gap-3 lg:grid-cols-[1fr_160px_160px_auto]">
+              <input
+                className="rounded-md border border-line bg-[#fbfdfd] px-4 py-3 text-sm outline-none focus:border-mint"
+                placeholder="Tim theo hang, dong xe, khu vuc"
+              />
+              <select className="rounded-md border border-line bg-[#fbfdfd] px-4 py-3 text-sm outline-none focus:border-mint">
+                <option>Hang xe</option>
+                {brands.map((brand) => (
+                  <option key={brand}>{brand}</option>
+                ))}
+              </select>
+              <select className="rounded-md border border-line bg-[#fbfdfd] px-4 py-3 text-sm outline-none focus:border-mint">
+                <option>Khoang gia</option>
+                <option>Duoi 500 trieu</option>
+                <option>500 - 700 trieu</option>
+                <option>Tren 700 trieu</option>
+              </select>
+              <button className="rounded-md bg-mint px-6 py-3 text-sm font-black text-white transition hover:bg-ink">
+                Loc xe
+              </button>
+            </div>
+            <div className="mt-4 grid gap-3 text-sm text-slate-600 sm:grid-cols-3">
+              <span className="rounded-md bg-sky px-3 py-2 font-bold text-ink">
+                Diem TB {averageScore}/100
+              </span>
+              <span className="rounded-md bg-sky px-3 py-2 font-bold text-ink">
+                Ho so phap ly ro
+              </span>
+              <span className="rounded-md bg-sky px-3 py-2 font-bold text-ink">
+                Co tu van di kem
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-5 py-10 lg:grid-cols-[260px_1fr]">
-        <aside className="h-fit rounded-md border border-line bg-white p-5">
-          <h2 className="text-base font-bold text-ink">Bo loc nhanh</h2>
+      <section className="mx-auto grid max-w-7xl gap-6 px-5 py-10 lg:grid-cols-[280px_1fr]">
+        <aside className="h-fit rounded-md border border-line bg-white p-5 shadow-sm lg:sticky lg:top-24">
+          <h2 className="text-lg font-black text-ink">Loc nhanh</h2>
           <div className="mt-5 grid gap-4">
-            <label className="flex items-center justify-between gap-3 text-sm text-slate-700">
-              Chi xe dang ban
-              <input type="checkbox" defaultChecked className="h-4 w-4 accent-mint" />
-            </label>
-            <label className="flex items-center justify-between gap-3 text-sm text-slate-700">
-              Kiem dinh dat
-              <input type="checkbox" defaultChecked className="h-4 w-4 accent-mint" />
-            </label>
-            <label className="flex items-center justify-between gap-3 text-sm text-slate-700">
-              Co lich xem xe
-              <input type="checkbox" className="h-4 w-4 accent-mint" />
-            </label>
+            {['Chi xe dang ban', 'Kiem dinh dat', 'Co lich xem xe', 'Gia da tham chieu'].map(
+              (item, index) => (
+                <label
+                  className="flex items-center justify-between gap-3 text-sm font-semibold text-slate-700"
+                  key={item}
+                >
+                  {item}
+                  <input
+                    type="checkbox"
+                    defaultChecked={index < 2}
+                    className="h-4 w-4 accent-mint"
+                  />
+                </label>
+              ),
+            )}
           </div>
-          <div className="mt-6 rounded-md bg-sky p-4">
-            <p className="text-sm font-bold text-ink">Can tu van nhanh?</p>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              De lai tieu chi, tu van vien se goi lai voi danh sach xe phu hop.
+
+          <div className="mt-6 rounded-md bg-ink p-5 text-white">
+            <p className="text-sm font-black">Chua biet chon xe nao?</p>
+            <p className="mt-2 text-sm leading-6 text-white/75">
+              Gui ngan sach va nhu cau, tu van vien se goi lai voi danh sach
+              hop ly hon viec tu loc tung tin.
             </p>
+            <a
+              className="mt-4 inline-flex rounded-md bg-white px-4 py-2 text-sm font-black text-ink"
+              href="/sell"
+            >
+              Nhan tu van
+            </a>
           </div>
         </aside>
 
-        <div className="grid gap-5 md:grid-cols-2">
-          {vehicles.map((vehicle) => (
-            <article
-              className="overflow-hidden rounded-md border border-line bg-white shadow-sm"
-              key={vehicle.id}
-            >
-              <a href={`/vehicles/${vehicle.slug}`}>
-                <div
-                  className="flex aspect-[16/10] items-start justify-between bg-cover bg-center p-4"
-                  style={{ backgroundImage: `url(${vehicle.imageUrl})` }}
-                >
-                  <span className="rounded-md bg-white/95 px-3 py-2 text-xs font-bold text-ink">
-                    {statusLabel(vehicle.status)}
-                  </span>
-                  <span className="rounded-md bg-mint px-3 py-2 text-xs font-bold text-white">
-                    {vehicle.inspection.score}/100
-                  </span>
-                </div>
-              </a>
-              <div className="p-5">
-                <p className="text-sm text-slate-600">
-                  {vehicle.year} - {vehicle.mileage} - {vehicle.location}
-                </p>
-                <a href={`/vehicles/${vehicle.slug}`}>
-                  <h2 className="mt-2 text-xl font-bold text-ink">{vehicle.name}</h2>
-                </a>
-                <p className="mt-2 text-2xl font-bold text-mint">
-                  {formatPrice(vehicle.price)}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{vehicle.summary}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {[vehicle.transmission, vehicle.fuel, `${vehicle.seats} cho`].map(
-                    (item) => (
-                      <span
-                        className="rounded-md border border-line px-3 py-2 text-xs font-semibold text-ink"
-                        key={item}
-                      >
-                        {item}
-                      </span>
-                    ),
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
+        <div>
+          <div className="mb-5 flex flex-col justify-between gap-3 rounded-md border border-line bg-white p-4 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-sm font-black text-ink">{vehicles.length} xe phu hop</p>
+              <p className="mt-1 text-sm text-slate-500">
+                Sap xep mac dinh theo xe moi cap nhat va diem kiem dinh.
+              </p>
+            </div>
+            <select className="rounded-md border border-line px-4 py-3 text-sm font-semibold outline-none focus:border-mint">
+              <option>Moi cap nhat</option>
+              <option>Gia thap den cao</option>
+              <option>Diem kiem dinh cao</option>
+            </select>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {vehicles.map((vehicle) => (
+              <VehicleCard key={vehicle.id} vehicle={vehicle} />
+            ))}
+          </div>
         </div>
       </section>
     </main>

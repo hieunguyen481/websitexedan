@@ -1,5 +1,6 @@
 import { findVehicleBySlug, vehicles } from '@xedan/shared';
 import { notFound } from 'next/navigation';
+import { SiteHeader } from '../../components/SiteHeader';
 import { formatPrice, statusLabel } from '../../utils';
 
 type VehicleDetailPageProps = {
@@ -22,119 +23,164 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
     notFound();
   }
 
+  const specs = [
+    ['Hang xe', vehicle.brand],
+    ['Dong xe', vehicle.model],
+    ['Nam san xuat', String(vehicle.year)],
+    ['So km', vehicle.mileage],
+    ['Hop so', vehicle.transmission],
+    ['Nhien lieu', vehicle.fuel],
+    ['So cho', `${vehicle.seats} cho`],
+    ['Mau xe', vehicle.color],
+    ['Bien so', vehicle.plateArea],
+  ];
+
   return (
     <main>
-      <header className="border-b border-line bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <a href="/" className="text-lg font-bold text-ink">
-            Xe Dan Voi Dan
-          </a>
-          <nav className="flex items-center gap-5 text-sm font-semibold text-ink">
-            <a href="/vehicles">Danh sach xe</a>
-            <a className="rounded-md bg-ink px-4 py-2 text-white" href="/sell">
-              Ban xe
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
-      <section className="bg-sky">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1fr_380px]">
+      <section className="border-b border-line bg-[#f2f8f7]">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1fr_390px]">
           <div>
-            <a className="text-sm font-bold text-mint" href="/vehicles">
-              Quay lai danh sach
+            <a className="text-sm font-black text-mint" href="/vehicles">
+              Quay lai danh sach xe
             </a>
-            <h1 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
+            <p className="mt-6 text-sm font-black uppercase tracking-wide text-slate-500">
+              {vehicle.location} - {statusLabel(vehicle.status)}
+            </p>
+            <h1 className="mt-3 text-5xl font-black leading-tight text-ink md:text-6xl">
               {vehicle.name}
             </h1>
-            <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-700">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
               {vehicle.summary}
             </p>
           </div>
-          <aside className="rounded-md border border-line bg-white p-5 shadow-soft">
-            <p className="text-sm font-semibold text-slate-600">
-              {statusLabel(vehicle.status)}
-            </p>
-            <p className="mt-2 text-3xl font-bold text-mint">
+
+          <aside className="h-fit rounded-md border border-line bg-white p-5 shadow-soft lg:sticky lg:top-24">
+            <p className="text-sm font-bold text-slate-500">Gia niem yet minh bach</p>
+            <p className="mt-2 text-4xl font-black text-mint">
               {formatPrice(vehicle.price)}
             </p>
-            <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-              <div className="rounded-md bg-sky p-3">
-                <p className="font-bold text-ink">{vehicle.inspection.score}/100</p>
-                <p className="mt-1 text-slate-600">Diem kiem dinh</p>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <div className="rounded-md bg-sky p-4">
+                <p className="text-2xl font-black text-ink">
+                  {vehicle.inspection.score}
+                </p>
+                <p className="mt-1 text-xs font-bold text-slate-500">Diem kiem dinh</p>
               </div>
-              <div className="rounded-md bg-sky p-3">
-                <p className="font-bold text-ink">{vehicle.location}</p>
-                <p className="mt-1 text-slate-600">Khu vuc</p>
+              <div className="rounded-md bg-sky p-4">
+                <p className="text-2xl font-black text-ink">{vehicle.year}</p>
+                <p className="mt-1 text-xs font-bold text-slate-500">Doi xe</p>
               </div>
             </div>
             <div className="mt-5 grid gap-3">
-              <button className="rounded-md bg-mint px-5 py-3 text-sm font-bold text-white">
+              <button className="rounded-md bg-mint px-5 py-3 text-sm font-black text-white transition hover:bg-ink">
                 Dat lich xem xe
               </button>
-              <button className="rounded-md border border-line px-5 py-3 text-sm font-bold text-ink">
+              <button className="rounded-md border border-line px-5 py-3 text-sm font-black text-ink transition hover:border-mint hover:text-mint">
                 Chat voi tu van vien
               </button>
             </div>
+            <p className="mt-4 text-xs leading-5 text-slate-500">
+              Lich xem xe se duoc nhan vien xac nhan truoc khi gui dia diem chi
+              tiet.
+            </p>
           </aside>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1fr_360px]">
-        <div>
+      <section className="mx-auto max-w-7xl px-5 py-10">
+        <div className="grid gap-4 lg:grid-cols-[1.4fr_0.6fr]">
           <div
-            className="aspect-[16/9] rounded-md bg-cover bg-center shadow-soft"
+            className="min-h-[520px] rounded-md bg-cover bg-center shadow-soft"
             style={{ backgroundImage: `url(${vehicle.imageUrl})` }}
           />
+          <div className="grid gap-4">
+            {[vehicle.color, vehicle.fuel, vehicle.transmission].map((item) => (
+              <div className="rounded-md border border-line bg-white p-5" key={item}>
+                <p className="text-sm font-bold text-slate-500">Thong tin nhanh</p>
+                <p className="mt-2 text-2xl font-black text-ink">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="mt-8 rounded-md border border-line bg-white p-6">
-            <h2 className="text-2xl font-bold text-ink">Diem noi bat</h2>
+      <section className="mx-auto grid max-w-7xl gap-8 px-5 pb-14 lg:grid-cols-[1fr_360px]">
+        <div className="grid gap-6">
+          <section className="rounded-md border border-line bg-white p-6">
+            <h2 className="text-2xl font-black text-ink">Diem noi bat</h2>
             <div className="mt-5 grid gap-3 md:grid-cols-3">
               {vehicle.highlights.map((highlight) => (
-                <div className="rounded-md bg-sky p-4 text-sm font-semibold text-ink" key={highlight}>
+                <div
+                  className="rounded-md bg-sky p-4 text-sm font-bold leading-6 text-ink"
+                  key={highlight}
+                >
                   {highlight}
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="mt-6 rounded-md border border-line bg-white p-6">
-            <h2 className="text-2xl font-bold text-ink">Bao cao kiem dinh</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Kiem dinh ngay {vehicle.inspection.checkedAt}, ket qua:{' '}
-              <span className="font-bold text-mint">{vehicle.inspection.result}</span>
-            </p>
-            <div className="mt-5 grid gap-3">
+          <section className="rounded-md border border-line bg-white p-6">
+            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <h2 className="text-2xl font-black text-ink">Bao cao kiem dinh</h2>
+                <p className="mt-2 text-sm text-slate-600">
+                  Kiem dinh ngay {vehicle.inspection.checkedAt}, ket qua{' '}
+                  <span className="font-black text-mint">{vehicle.inspection.result}</span>.
+                </p>
+              </div>
+              <button className="rounded-md border border-line px-4 py-3 text-sm font-black text-ink">
+                Xem PDF mau
+              </button>
+            </div>
+
+            <div className="mt-6 grid gap-3">
               {vehicle.inspection.items.map((item) => (
                 <div
-                  className="flex items-center justify-between rounded-md border border-line px-4 py-3 text-sm"
+                  className="grid gap-3 rounded-md border border-line px-4 py-4 text-sm sm:grid-cols-[1fr_auto] sm:items-center"
                   key={item.label}
                 >
-                  <span className="font-semibold text-ink">{item.label}</span>
-                  <span className="font-bold text-mint">{item.status}</span>
+                  <span className="font-black text-ink">{item.label}</span>
+                  <span className="rounded-md bg-sky px-3 py-2 text-xs font-black text-mint">
+                    {item.status}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
+          </section>
+
+          <section className="rounded-md border border-line bg-white p-6">
+            <h2 className="text-2xl font-black text-ink">Giao dich duoc dieu phoi</h2>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
+              {['Dat lich xem xe', 'Dat coc an toan', 'Ban giao va sang ten'].map(
+                (step, index) => (
+                  <div className="rounded-md border border-line p-4" key={step}>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-md bg-sun text-sm font-black text-ink">
+                      {index + 1}
+                    </span>
+                    <p className="mt-4 text-sm font-black text-ink">{step}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      Nhan vien cap nhat trang thai va nhac viec cho cac ben.
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
+          </section>
         </div>
 
         <aside className="h-fit rounded-md border border-line bg-white p-6">
-          <h2 className="text-xl font-bold text-ink">Thong so xe</h2>
+          <h2 className="text-xl font-black text-ink">Thong so xe</h2>
           <dl className="mt-5 grid gap-4 text-sm">
-            {[
-              ['Hang xe', vehicle.brand],
-              ['Dong xe', vehicle.model],
-              ['Nam san xuat', String(vehicle.year)],
-              ['So km', vehicle.mileage],
-              ['Hop so', vehicle.transmission],
-              ['Nhien lieu', vehicle.fuel],
-              ['So cho', `${vehicle.seats} cho`],
-              ['Mau xe', vehicle.color],
-              ['Bien so', vehicle.plateArea],
-            ].map(([label, value]) => (
-              <div className="flex items-center justify-between gap-4 border-b border-line pb-3" key={label}>
+            {specs.map(([label, value]) => (
+              <div
+                className="flex items-center justify-between gap-4 border-b border-line pb-3"
+                key={label}
+              >
                 <dt className="text-slate-600">{label}</dt>
-                <dd className="font-bold text-ink">{value}</dd>
+                <dd className="text-right font-black text-ink">{value}</dd>
               </div>
             ))}
           </dl>
