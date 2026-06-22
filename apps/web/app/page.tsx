@@ -1,10 +1,24 @@
 import { featuredVehicles, processSteps, trustStats, vehicles } from '@xedan/shared';
+import {
+  ArrowRight,
+  BadgeCheck,
+  CalendarCheck,
+  Car,
+  ClipboardCheck,
+  FileText,
+  Handshake,
+  Search,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react';
 import { SiteHeader } from './components/SiteHeader';
 import { VehicleCard } from './components/VehicleCard';
 import { formatPrice } from './utils';
 
 const heroVehicle = featuredVehicles[1];
 const recentVehicle = vehicles[3];
+const statIcons = [ClipboardCheck, CalendarCheck, Handshake];
+const processIcons = [FileText, ShieldCheck, Sparkles, Handshake];
 
 export default function HomePage() {
   return (
@@ -15,6 +29,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-16">
           <div>
             <p className="inline-flex rounded-md border border-mint/20 bg-white px-3 py-2 text-sm font-black text-mint shadow-sm">
+              <ShieldCheck aria-hidden="true" className="mr-2" size={17} strokeWidth={2.5} />
               San xe cu co kiem dinh va dieu phoi giao dich
             </p>
             <h1 className="mt-5 max-w-3xl text-5xl font-black leading-[1.03] text-ink md:text-7xl">
@@ -36,22 +51,28 @@ export default function HomePage() {
                 placeholder="Khoang gia mong muon"
               />
               <a
-                className="rounded-md bg-mint px-6 py-3 text-center text-sm font-black text-white transition hover:bg-ink"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-mint px-6 py-3 text-center text-sm font-black text-white transition hover:bg-ink"
                 href="/vehicles"
               >
+                <Search aria-hidden="true" size={17} strokeWidth={2.5} />
                 Tim xe phu hop
               </a>
             </div>
 
             <div className="mt-7 grid max-w-2xl grid-cols-3 gap-3">
-              {trustStats.map((item) => (
+              {trustStats.map((item, index) => {
+                const Icon = statIcons[index] ?? BadgeCheck;
+
+                return (
                 <div className="rounded-md border border-line bg-white p-4" key={item.label}>
+                  <Icon aria-hidden="true" className="mb-3 text-mint" size={22} strokeWidth={2.4} />
                   <p className="text-2xl font-black text-ink">{item.value}</p>
                   <p className="mt-1 text-xs font-semibold leading-5 text-slate-500">
                     {item.label}
                   </p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -68,6 +89,7 @@ export default function HomePage() {
                 </div>
                 <div className="rounded-md bg-white/95 p-5 shadow-soft">
                   <p className="text-sm font-bold text-slate-500">
+                    <Car aria-hidden="true" className="mr-2 inline text-mint" size={16} strokeWidth={2.5} />
                     Xe dang duoc quan tam
                   </p>
                   <h2 className="mt-2 text-2xl font-black text-ink">{heroVehicle.name}</h2>
@@ -131,15 +153,19 @@ export default function HomePage() {
               </h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
-              {processSteps.map((step, index) => (
+              {processSteps.map((step, index) => {
+                const Icon = processIcons[index] ?? ClipboardCheck;
+
+                return (
                 <div className="rounded-md border border-line bg-[#fbfdfd] p-5" key={step.title}>
                   <span className="flex h-10 w-10 items-center justify-center rounded-md bg-sun text-sm font-black text-ink">
-                    {index + 1}
+                    <Icon aria-hidden="true" size={19} strokeWidth={2.5} />
                   </span>
                   <h3 className="mt-5 text-lg font-black text-ink">{step.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{step.description}</p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -163,17 +189,23 @@ export default function HomePage() {
             phoi theo tung trang thai.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {['Kiem dinh tai nha', 'Tu van gia ban', 'Ho tro ban giao'].map((item) => (
-              <div className="rounded-md border border-line bg-white p-4 text-sm font-black text-ink" key={item}>
-                {item}
+            {[
+              { label: 'Kiem dinh tai nha', icon: ShieldCheck },
+              { label: 'Tu van gia ban', icon: FileText },
+              { label: 'Ho tro ban giao', icon: Handshake },
+            ].map(({ label, icon: Icon }) => (
+              <div className="rounded-md border border-line bg-white p-4 text-sm font-black text-ink" key={label}>
+                <Icon aria-hidden="true" className="mb-3 text-mint" size={20} strokeWidth={2.4} />
+                {label}
               </div>
             ))}
           </div>
           <a
-            className="mt-7 inline-flex rounded-md bg-ink px-5 py-3 text-sm font-black text-white transition hover:bg-mint"
+            className="mt-7 inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-sm font-black text-white transition hover:bg-mint"
             href="/sell"
           >
             Dang ky ban xe
+            <ArrowRight aria-hidden="true" size={17} strokeWidth={2.5} />
           </a>
         </div>
       </section>

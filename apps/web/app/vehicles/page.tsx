@@ -1,4 +1,13 @@
 import { getVehicleBrands, vehicles } from '@xedan/shared';
+import {
+  ArrowDownUp,
+  BadgeCheck,
+  Filter,
+  Gauge,
+  MessageCircle,
+  Search,
+  SlidersHorizontal,
+} from 'lucide-react';
 import { SiteHeader } from '../components/SiteHeader';
 import { VehicleCard } from '../components/VehicleCard';
 
@@ -26,10 +35,18 @@ export default function VehiclesPage() {
           </div>
           <div className="rounded-md border border-line bg-white p-5 shadow-soft">
             <div className="grid gap-3 lg:grid-cols-[1fr_160px_160px_auto]">
-              <input
-                className="rounded-md border border-line bg-[#fbfdfd] px-4 py-3 text-sm outline-none focus:border-mint"
-                placeholder="Tim theo hang, dong xe, khu vuc"
-              />
+              <label className="relative">
+                <Search
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  size={17}
+                  strokeWidth={2.4}
+                />
+                <input
+                  className="w-full rounded-md border border-line bg-[#fbfdfd] py-3 pl-11 pr-4 text-sm outline-none focus:border-mint"
+                  placeholder="Tim theo hang, dong xe, khu vuc"
+                />
+              </label>
               <select className="rounded-md border border-line bg-[#fbfdfd] px-4 py-3 text-sm outline-none focus:border-mint">
                 <option>Hang xe</option>
                 {brands.map((brand) => (
@@ -42,18 +59,22 @@ export default function VehiclesPage() {
                 <option>500 - 700 trieu</option>
                 <option>Tren 700 trieu</option>
               </select>
-              <button className="rounded-md bg-mint px-6 py-3 text-sm font-black text-white transition hover:bg-ink">
+              <button className="inline-flex items-center justify-center gap-2 rounded-md bg-mint px-6 py-3 text-sm font-black text-white transition hover:bg-ink">
+                <Filter aria-hidden="true" size={17} strokeWidth={2.5} />
                 Loc xe
               </button>
             </div>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 sm:grid-cols-3">
-              <span className="rounded-md bg-sky px-3 py-2 font-bold text-ink">
+              <span className="inline-flex items-center gap-2 rounded-md bg-sky px-3 py-2 font-bold text-ink">
+                <Gauge aria-hidden="true" size={16} strokeWidth={2.4} />
                 Diem TB {averageScore}/100
               </span>
-              <span className="rounded-md bg-sky px-3 py-2 font-bold text-ink">
+              <span className="inline-flex items-center gap-2 rounded-md bg-sky px-3 py-2 font-bold text-ink">
+                <BadgeCheck aria-hidden="true" size={16} strokeWidth={2.4} />
                 Ho so phap ly ro
               </span>
-              <span className="rounded-md bg-sky px-3 py-2 font-bold text-ink">
+              <span className="inline-flex items-center gap-2 rounded-md bg-sky px-3 py-2 font-bold text-ink">
+                <MessageCircle aria-hidden="true" size={16} strokeWidth={2.4} />
                 Co tu van di kem
               </span>
             </div>
@@ -63,7 +84,10 @@ export default function VehiclesPage() {
 
       <section className="mx-auto grid max-w-7xl gap-6 px-5 py-10 lg:grid-cols-[280px_1fr]">
         <aside className="h-fit rounded-md border border-line bg-white p-5 shadow-sm lg:sticky lg:top-24">
-          <h2 className="text-lg font-black text-ink">Loc nhanh</h2>
+          <h2 className="inline-flex items-center gap-2 text-lg font-black text-ink">
+            <SlidersHorizontal aria-hidden="true" size={20} strokeWidth={2.5} />
+            Loc nhanh
+          </h2>
           <div className="mt-5 grid gap-4">
             {['Chi xe dang ban', 'Kiem dinh dat', 'Co lich xem xe', 'Gia da tham chieu'].map(
               (item, index) => (
@@ -89,9 +113,10 @@ export default function VehiclesPage() {
               hop ly hon viec tu loc tung tin.
             </p>
             <a
-              className="mt-4 inline-flex rounded-md bg-white px-4 py-2 text-sm font-black text-ink"
+              className="mt-4 inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-black text-ink"
               href="/sell"
             >
+              <MessageCircle aria-hidden="true" size={16} strokeWidth={2.4} />
               Nhan tu van
             </a>
           </div>
@@ -105,11 +130,19 @@ export default function VehiclesPage() {
                 Sap xep mac dinh theo xe moi cap nhat va diem kiem dinh.
               </p>
             </div>
-            <select className="rounded-md border border-line px-4 py-3 text-sm font-semibold outline-none focus:border-mint">
-              <option>Moi cap nhat</option>
-              <option>Gia thap den cao</option>
-              <option>Diem kiem dinh cao</option>
-            </select>
+            <label className="relative">
+              <ArrowDownUp
+                aria-hidden="true"
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                size={16}
+                strokeWidth={2.4}
+              />
+              <select className="rounded-md border border-line py-3 pl-10 pr-4 text-sm font-semibold outline-none focus:border-mint">
+                <option>Moi cap nhat</option>
+                <option>Gia thap den cao</option>
+                <option>Diem kiem dinh cao</option>
+              </select>
+            </label>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">

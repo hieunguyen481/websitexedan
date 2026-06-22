@@ -1,4 +1,20 @@
 import { findVehicleBySlug, vehicles } from '@xedan/shared';
+import {
+  ArrowLeft,
+  BadgeCheck,
+  CalendarCheck,
+  CarFront,
+  ClipboardCheck,
+  FileText,
+  Fuel,
+  Gauge,
+  Handshake,
+  MapPin,
+  MessageCircle,
+  Palette,
+  Settings,
+  ShieldCheck,
+} from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '../../components/SiteHeader';
 import { formatPrice, statusLabel } from '../../utils';
@@ -43,9 +59,11 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1fr_390px]">
           <div>
             <a className="text-sm font-black text-mint" href="/vehicles">
+              <ArrowLeft aria-hidden="true" className="mr-2 inline" size={16} strokeWidth={2.5} />
               Quay lai danh sach xe
             </a>
-            <p className="mt-6 text-sm font-black uppercase tracking-wide text-slate-500">
+            <p className="mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-slate-500">
+              <MapPin aria-hidden="true" size={16} strokeWidth={2.4} />
               {vehicle.location} - {statusLabel(vehicle.status)}
             </p>
             <h1 className="mt-3 text-5xl font-black leading-tight text-ink md:text-6xl">
@@ -63,21 +81,25 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             </p>
             <div className="mt-5 grid grid-cols-2 gap-3">
               <div className="rounded-md bg-sky p-4">
+                <Gauge aria-hidden="true" className="mb-2 text-mint" size={22} strokeWidth={2.5} />
                 <p className="text-2xl font-black text-ink">
                   {vehicle.inspection.score}
                 </p>
                 <p className="mt-1 text-xs font-bold text-slate-500">Diem kiem dinh</p>
               </div>
               <div className="rounded-md bg-sky p-4">
+                <CarFront aria-hidden="true" className="mb-2 text-mint" size={22} strokeWidth={2.5} />
                 <p className="text-2xl font-black text-ink">{vehicle.year}</p>
                 <p className="mt-1 text-xs font-bold text-slate-500">Doi xe</p>
               </div>
             </div>
             <div className="mt-5 grid gap-3">
-              <button className="rounded-md bg-mint px-5 py-3 text-sm font-black text-white transition hover:bg-ink">
+              <button className="inline-flex items-center justify-center gap-2 rounded-md bg-mint px-5 py-3 text-sm font-black text-white transition hover:bg-ink">
+                <CalendarCheck aria-hidden="true" size={17} strokeWidth={2.5} />
                 Dat lich xem xe
               </button>
-              <button className="rounded-md border border-line px-5 py-3 text-sm font-black text-ink transition hover:border-mint hover:text-mint">
+              <button className="inline-flex items-center justify-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-black text-ink transition hover:border-mint hover:text-mint">
+                <MessageCircle aria-hidden="true" size={17} strokeWidth={2.5} />
                 Chat voi tu van vien
               </button>
             </div>
@@ -96,10 +118,15 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             style={{ backgroundImage: `url(${vehicle.imageUrl})` }}
           />
           <div className="grid gap-4">
-            {[vehicle.color, vehicle.fuel, vehicle.transmission].map((item) => (
-              <div className="rounded-md border border-line bg-white p-5" key={item}>
+            {[
+              { label: vehicle.color, icon: Palette },
+              { label: vehicle.fuel, icon: Fuel },
+              { label: vehicle.transmission, icon: Settings },
+            ].map(({ label, icon: Icon }) => (
+              <div className="rounded-md border border-line bg-white p-5" key={label}>
+                <Icon aria-hidden="true" className="mb-3 text-mint" size={24} strokeWidth={2.4} />
                 <p className="text-sm font-bold text-slate-500">Thong tin nhanh</p>
-                <p className="mt-2 text-2xl font-black text-ink">{item}</p>
+                <p className="mt-2 text-2xl font-black text-ink">{label}</p>
               </div>
             ))}
           </div>
@@ -116,6 +143,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
                   className="rounded-md bg-sky p-4 text-sm font-bold leading-6 text-ink"
                   key={highlight}
                 >
+                  <BadgeCheck aria-hidden="true" className="mb-3 text-mint" size={20} strokeWidth={2.5} />
                   {highlight}
                 </div>
               ))}
@@ -125,13 +153,17 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
           <section className="rounded-md border border-line bg-white p-6">
             <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
               <div>
-                <h2 className="text-2xl font-black text-ink">Bao cao kiem dinh</h2>
+                <h2 className="inline-flex items-center gap-2 text-2xl font-black text-ink">
+                  <ShieldCheck aria-hidden="true" size={25} strokeWidth={2.5} />
+                  Bao cao kiem dinh
+                </h2>
                 <p className="mt-2 text-sm text-slate-600">
                   Kiem dinh ngay {vehicle.inspection.checkedAt}, ket qua{' '}
                   <span className="font-black text-mint">{vehicle.inspection.result}</span>.
                 </p>
               </div>
-              <button className="rounded-md border border-line px-4 py-3 text-sm font-black text-ink">
+              <button className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-3 text-sm font-black text-ink">
+                <FileText aria-hidden="true" size={17} strokeWidth={2.5} />
                 Xem PDF mau
               </button>
             </div>
@@ -143,7 +175,8 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
                   key={item.label}
                 >
                   <span className="font-black text-ink">{item.label}</span>
-                  <span className="rounded-md bg-sky px-3 py-2 text-xs font-black text-mint">
+                  <span className="inline-flex items-center gap-2 rounded-md bg-sky px-3 py-2 text-xs font-black text-mint">
+                    <BadgeCheck aria-hidden="true" size={14} strokeWidth={2.5} />
                     {item.status}
                   </span>
                 </div>
@@ -152,27 +185,35 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
           </section>
 
           <section className="rounded-md border border-line bg-white p-6">
-            <h2 className="text-2xl font-black text-ink">Giao dich duoc dieu phoi</h2>
+            <h2 className="inline-flex items-center gap-2 text-2xl font-black text-ink">
+              <Handshake aria-hidden="true" size={25} strokeWidth={2.5} />
+              Giao dich duoc dieu phoi
+            </h2>
             <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {['Dat lich xem xe', 'Dat coc an toan', 'Ban giao va sang ten'].map(
-                (step, index) => (
-                  <div className="rounded-md border border-line p-4" key={step}>
+              {[
+                { label: 'Dat lich xem xe', icon: CalendarCheck },
+                { label: 'Dat coc an toan', icon: ShieldCheck },
+                { label: 'Ban giao va sang ten', icon: ClipboardCheck },
+              ].map(({ label, icon: Icon }) => (
+                  <div className="rounded-md border border-line p-4" key={label}>
                     <span className="flex h-9 w-9 items-center justify-center rounded-md bg-sun text-sm font-black text-ink">
-                      {index + 1}
+                      <Icon aria-hidden="true" size={18} strokeWidth={2.5} />
                     </span>
-                    <p className="mt-4 text-sm font-black text-ink">{step}</p>
+                    <p className="mt-4 text-sm font-black text-ink">{label}</p>
                     <p className="mt-2 text-sm leading-6 text-slate-600">
                       Nhan vien cap nhat trang thai va nhac viec cho cac ben.
                     </p>
                   </div>
-                ),
-              )}
+                ))}
             </div>
           </section>
         </div>
 
         <aside className="h-fit rounded-md border border-line bg-white p-6">
-          <h2 className="text-xl font-black text-ink">Thong so xe</h2>
+          <h2 className="inline-flex items-center gap-2 text-xl font-black text-ink">
+            <ClipboardCheck aria-hidden="true" size={21} strokeWidth={2.5} />
+            Thong so xe
+          </h2>
           <dl className="mt-5 grid gap-4 text-sm">
             {specs.map(([label, value]) => (
               <div

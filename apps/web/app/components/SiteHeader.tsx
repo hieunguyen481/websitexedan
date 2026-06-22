@@ -1,3 +1,5 @@
+import { CarFront, ClipboardCheck, Search, Send } from 'lucide-react';
+
 type SiteHeaderProps = {
   tone?: 'light' | 'transparent';
 };
@@ -16,8 +18,8 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <a className="flex items-center gap-3" href="/">
-          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-ink text-sm font-black text-white">
-            XD
+          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-ink text-white">
+            <CarFront aria-hidden="true" size={21} strokeWidth={2.6} />
           </span>
           <span>
             <span className="block text-base font-black text-ink">
@@ -30,22 +32,26 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
         </a>
 
         <nav className="hidden items-center gap-7 text-sm font-bold text-ink md:flex">
-          <a className="transition hover:text-mint" href="/vehicles">
+          <a className="inline-flex items-center gap-2 transition hover:text-mint" href="/vehicles">
+            <Search aria-hidden="true" size={16} strokeWidth={2.4} />
             Tim xe
           </a>
-          <a className="transition hover:text-mint" href="/sell">
+          <a className="inline-flex items-center gap-2 transition hover:text-mint" href="/sell">
+            <ClipboardCheck aria-hidden="true" size={16} strokeWidth={2.4} />
             Ban xe
           </a>
-          <a className="transition hover:text-mint" href="/#process">
+          <a className="inline-flex items-center gap-2 transition hover:text-mint" href="/#process">
+            <Send aria-hidden="true" size={16} strokeWidth={2.4} />
             Quy trinh
           </a>
         </nav>
 
         <div className="flex items-center gap-3">
           <a
-            className="hidden rounded-md border border-line bg-white px-4 py-2 text-sm font-bold text-ink transition hover:border-mint md:inline-flex"
+            className="hidden items-center gap-2 rounded-md border border-line bg-white px-4 py-2 text-sm font-bold text-ink transition hover:border-mint md:inline-flex"
             href="/vehicles"
           >
+            <Search aria-hidden="true" size={16} strokeWidth={2.4} />
             Xem xe
           </a>
           <a

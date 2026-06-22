@@ -1,4 +1,5 @@
 import type { Vehicle } from '@xedan/shared';
+import { ArrowRight, BadgeCheck, Fuel, Gauge, MapPin, Settings, Users } from 'lucide-react';
 import { formatPrice, statusLabel } from '../utils';
 
 type VehicleCardProps = {
@@ -17,6 +18,7 @@ export function VehicleCard({ vehicle, compact = false }: VehicleCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
           <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-3">
             <span className="rounded-md bg-white/95 px-3 py-2 text-xs font-black text-ink">
+              <BadgeCheck aria-hidden="true" className="mr-1 inline" size={14} strokeWidth={2.5} />
               {statusLabel(vehicle.status)}
             </span>
             <span className="rounded-md bg-mint px-3 py-2 text-xs font-black text-white">
@@ -36,6 +38,7 @@ export function VehicleCard({ vehicle, compact = false }: VehicleCardProps) {
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm text-slate-500">
+              <MapPin aria-hidden="true" className="mr-1 inline" size={14} strokeWidth={2.3} />
               {vehicle.year} - {vehicle.mileage}
             </p>
             <p className="mt-2 text-2xl font-black text-mint">
@@ -52,21 +55,28 @@ export function VehicleCard({ vehicle, compact = false }: VehicleCardProps) {
         )}
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {[vehicle.transmission, vehicle.fuel, `${vehicle.seats} cho`].map((item) => (
+          {[
+            { label: vehicle.transmission, icon: Settings },
+            { label: vehicle.fuel, icon: Fuel },
+            { label: `${vehicle.seats} cho`, icon: Users },
+          ].map(({ label, icon: Icon }) => (
             <span
-              className="rounded-md border border-line px-3 py-2 text-xs font-bold text-ink"
-              key={item}
+              className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-2 text-xs font-bold text-ink"
+              key={label}
             >
-              {item}
+              <Icon aria-hidden="true" size={14} strokeWidth={2.4} />
+              {label}
             </span>
           ))}
         </div>
 
         <a
-          className="mt-5 inline-flex w-full items-center justify-center rounded-md bg-ink px-4 py-3 text-sm font-bold text-white transition group-hover:bg-mint"
+          className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-ink px-4 py-3 text-sm font-bold text-white transition group-hover:bg-mint"
           href={`/vehicles/${vehicle.slug}`}
         >
+          <Gauge aria-hidden="true" size={17} strokeWidth={2.5} />
           Xem ho so xe
+          <ArrowRight aria-hidden="true" size={17} strokeWidth={2.5} />
         </a>
       </div>
     </article>
