@@ -1,10 +1,5 @@
 import { featuredVehicles, processSteps, trustStats } from '@xedan/shared';
-
-const currencyFormatter = new Intl.NumberFormat('vi-VN', {
-  style: 'currency',
-  currency: 'VND',
-  maximumFractionDigits: 0,
-});
+import { formatPrice, statusLabel } from './utils';
 
 export default function HomePage() {
   return (
@@ -18,13 +13,13 @@ export default function HomePage() {
             <h1 className="text-xl font-bold text-ink">Mua ban xe cu co dieu phoi</h1>
           </div>
           <nav className="hidden items-center gap-6 text-sm font-medium text-ink md:flex">
-            <a href="#search">Tim xe</a>
-            <a href="#sell">Ban xe</a>
+            <a href="/vehicles">Tim xe</a>
+            <a href="/sell">Ban xe</a>
             <a href="#process">Quy trinh</a>
           </nav>
           <a
             className="rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white"
-            href="#sell"
+            href="/sell"
           >
             Dang ban xe
           </a>
@@ -57,14 +52,20 @@ export default function HomePage() {
                 className="rounded-md border border-line px-4 py-3 text-sm outline-none focus:border-mint"
                 placeholder="Khoang gia mong muon"
               />
-              <button className="rounded-md bg-mint px-6 py-3 text-sm font-bold text-white">
+              <a
+                className="rounded-md bg-mint px-6 py-3 text-center text-sm font-bold text-white"
+                href="/vehicles"
+              >
                 Tim xe
-              </button>
+              </a>
             </form>
           </div>
           <div className="rounded-md border border-line bg-white p-4 shadow-soft">
-            <div className="aspect-[4/3] rounded-md bg-[linear-gradient(135deg,#ffffff_0%,#eaf6ff_45%,#dff6ef_100%)] p-5">
-              <div className="flex h-full flex-col justify-between rounded-md border border-white/80 bg-white/70 p-5">
+            <div
+              className="aspect-[4/3] rounded-md bg-cover bg-center p-5"
+              style={{ backgroundImage: `url(${featuredVehicles[1].imageUrl})` }}
+            >
+              <div className="flex h-full flex-col justify-between rounded-md border border-white/80 bg-white/85 p-5">
                 <div>
                   <p className="text-sm font-semibold text-mint">Tin dang noi bat</p>
                   <h3 className="mt-2 text-2xl font-bold text-ink">
@@ -93,7 +94,7 @@ export default function HomePage() {
             </p>
             <h2 className="mt-2 text-3xl font-bold text-ink">Lua chon phu hop de bat dau</h2>
           </div>
-          <a className="hidden text-sm font-bold text-mint md:block" href="#search">
+          <a className="hidden text-sm font-bold text-mint md:block" href="/vehicles">
             Xem them
           </a>
         </div>
@@ -103,14 +104,25 @@ export default function HomePage() {
               className="rounded-md border border-line bg-white p-4 shadow-sm"
               key={vehicle.id}
             >
-              <div className="aspect-[16/10] rounded-md bg-sky" />
+              <a href={`/vehicles/${vehicle.slug}`}>
+                <div
+                  className="flex aspect-[16/10] items-start justify-between rounded-md bg-cover bg-center p-3"
+                  style={{ backgroundImage: `url(${vehicle.imageUrl})` }}
+                >
+                  <span className="rounded-md bg-white/95 px-3 py-2 text-xs font-bold text-ink">
+                    {statusLabel(vehicle.status)}
+                  </span>
+                </div>
+              </a>
               <div className="mt-4">
                 <p className="text-sm text-slate-600">
-                  {vehicle.year} - {vehicle.mileage}
+                  {vehicle.year} - {vehicle.mileage} - {vehicle.location}
                 </p>
-                <h3 className="mt-1 text-lg font-bold text-ink">{vehicle.name}</h3>
+                <a href={`/vehicles/${vehicle.slug}`}>
+                  <h3 className="mt-1 text-lg font-bold text-ink">{vehicle.name}</h3>
+                </a>
                 <p className="mt-2 text-xl font-bold text-mint">
-                  {currencyFormatter.format(vehicle.price)}
+                  {formatPrice(vehicle.price)}
                 </p>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{vehicle.summary}</p>
               </div>
@@ -163,6 +175,9 @@ export default function HomePage() {
           <button className="rounded-md bg-ink px-5 py-3 text-sm font-bold text-white">
             Gui yeu cau
           </button>
+          <a className="text-center text-sm font-bold text-mint" href="/sell">
+            Mo form dang ky day du
+          </a>
         </form>
       </section>
     </main>
