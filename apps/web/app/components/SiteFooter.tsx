@@ -1,4 +1,4 @@
-import { bodyStyleLinks, getVehicleBrands } from '@xedan/shared';
+import { getVehicleBrands } from '@xedan/shared';
 import { ArrowUpRight, CarFront, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 
@@ -46,13 +46,13 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="text-sm font-bold text-white">Khám phá</h2>
+          <h2 className="text-sm font-bold text-white">Tài khoản</h2>
           <div className="mt-4 grid gap-3 text-sm text-white/60">
-            {bodyStyleLinks.slice(0, 5).map((link) => (
-              <Link className="hover:text-white" href={link.href} key={link.href}>
-                {link.title}
-              </Link>
-            ))}
+            <Link className="hover:text-white" href="/account">Tổng quan</Link>
+            <Link className="hover:text-white" href="/account/favorites">Xe đã lưu</Link>
+            <Link className="hover:text-white" href="/account/appointments">Lịch xem xe</Link>
+            <Link className="hover:text-white" href="/account/transactions">Giao dịch</Link>
+            <Link className="hover:text-white" href="/search-alerts">Tin tìm kiếm</Link>
           </div>
         </div>
 
@@ -81,9 +81,12 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 Xe Dân Với Dân. Thông tin xe dùng cho mục đích tham khảo.</p>
-          <div className="flex gap-4">
-            <a className="hover:text-white" href="#">Điều khoản</a>
-            <a className="hover:text-white" href="#">Quyền riêng tư</a>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <Link className="hover:text-white" href="/faq">FAQ</Link>
+            <Link className="hover:text-white" href="/contact">Liên hệ</Link>
+            <Link className="hover:text-white" href="/terms">Điều khoản</Link>
+            <Link className="hover:text-white" href="/privacy">Quyền riêng tư</Link>
+            <Link className="hover:text-white" href="/refund-policy">Hoàn cọc</Link>
           </div>
         </div>
       </div>

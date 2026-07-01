@@ -173,13 +173,13 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
                     <strong className="text-mint">{vehicle.inspection.result}</strong>
                   </p>
                 </div>
-                <button
+                <Link
                   className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-line bg-white px-4 text-sm font-bold text-ink hover:border-mint hover:text-mint"
-                  type="button"
+                  href={`/inspection/${vehicle.id}`}
                 >
                   <FileText aria-hidden="true" size={17} />
-                  Xem báo cáo PDF
-                </button>
+                  Xem báo cáo đầy đủ
+                </Link>
               </div>
 
               <div className="mt-6 divide-y divide-line border-y border-line">
@@ -224,13 +224,20 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
               Chọn thời gian thuận tiện, tư vấn viên sẽ xác nhận lịch và địa
               điểm xem xe.
             </p>
-            <button
+            <Link
               className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-mint px-4 text-sm font-bold text-white transition hover:bg-ink"
-              type="button"
+              href={`/vehicles/${vehicle.slug}/book`}
             >
               <CalendarCheck aria-hidden="true" size={18} />
               Đặt lịch xem xe
-            </button>
+            </Link>
+            <Link
+              className="mt-2 inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-bold text-white transition hover:bg-mint"
+              href={`/checkout/${vehicle.id}`}
+            >
+              <ShieldCheck aria-hidden="true" size={18} />
+              Đặt cọc giữ xe
+            </Link>
             <button
               className="mt-2 inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-line bg-white px-4 text-sm font-bold text-ink transition hover:border-mint hover:text-mint"
               type="button"

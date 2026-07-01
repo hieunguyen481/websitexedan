@@ -36,7 +36,10 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <form className="rounded-lg border border-line bg-white p-6 shadow-soft sm:p-8">
+          <form
+            action="/account"
+            className="rounded-lg border border-line bg-white p-6 shadow-soft sm:p-8"
+          >
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-leaf text-mint">
               <UserPlus aria-hidden="true" size={22} />
             </div>

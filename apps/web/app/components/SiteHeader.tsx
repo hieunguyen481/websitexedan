@@ -3,6 +3,7 @@ import {
   BatteryCharging,
   CarFront,
   ChevronDown,
+  CircleUserRound,
   ClipboardCheck,
   LogIn,
   Menu,
@@ -84,6 +85,14 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
 
         <div className="hidden items-center gap-2 md:flex">
           <Link
+            aria-label="Tài khoản"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-white text-ink transition hover:border-mint hover:text-mint"
+            href="/account"
+            title="Tài khoản"
+          >
+            <CircleUserRound aria-hidden="true" size={18} />
+          </Link>
+          <Link
             aria-label="Đăng nhập"
             className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-3.5 text-sm font-semibold text-ink transition hover:border-mint hover:text-mint"
             href="/auth/login"
@@ -120,6 +129,13 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
                 </Link>
               ))}
               <div className="my-2 border-t border-line" />
+              <Link
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
+                href="/account"
+              >
+                <CircleUserRound aria-hidden="true" className="text-mint" size={18} />
+                Tài khoản
+              </Link>
               <Link
                 className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
                 href="/auth/login"
