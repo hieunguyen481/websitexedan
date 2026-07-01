@@ -1,16 +1,25 @@
+'use client';
+
 import {
   BadgeCheck,
   BatteryCharging,
+  Bell,
   CarFront,
   ChevronDown,
   CircleUserRound,
   ClipboardCheck,
+  Heart,
   LogIn,
+  LogOut,
   Menu,
+  ReceiptText,
   Search,
   UserPlus,
+  UserRound,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from './AuthProvider';
 
 type SiteHeaderProps = {
   tone?: 'light' | 'transparent';
@@ -23,7 +32,33 @@ const mainLinks = [
   { label: 'Xe điện', href: '/fuel/electric', icon: BatteryCharging },
 ];
 
+const userLinks = [
+  { label: 'Tổng quan tài khoản', href: '/account', icon: CircleUserRound },
+  { label: 'Hồ sơ cá nhân', href: '/account/profile', icon: UserRound },
+  { label: 'Xe đã lưu', href: '/account/favorites', icon: Heart },
+  { label: 'Giao dịch', href: '/account/transactions', icon: ReceiptText },
+  { label: 'Thông báo', href: '/account/notifications', icon: Bell },
+];
+
+function getInitials(fullName: string) {
+  return fullName
+    .split(' ')
+    .slice(-2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase();
+}
+
 export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
+  const { ready, user, logout } = useAuth();
+  const router = useRouter();
+  const isLoggedIn = ready && Boolean(user);
+
+  function handleLogout() {
+    logout();
+    router.push('/');
+  }
+
   return (
     <header
       className={[
@@ -41,9 +76,15 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
             <a className="transition hover:text-mint" href="tel:19000000">
               Hotline 1900 0000
             </a>
-            <Link className="transition hover:text-mint" href="/auth/register">
-              Đăng ký
-            </Link>
+            {isLoggedIn && user ? (
+              <Link className="transition hover:text-mint" href="/account">
+                Xin chào, {user.fullName}
+              </Link>
+            ) : (
+              <Link className="transition hover:text-mint" href="/auth/register">
+                Đăng ký
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -84,22 +125,73 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link
-            aria-label="Tài khoản"
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-white text-ink transition hover:border-mint hover:text-mint"
-            href="/account"
-            title="Tài khoản"
-          >
-            <CircleUserRound aria-hidden="true" size={18} />
-          </Link>
-          <Link
-            aria-label="Đăng nhập"
-            className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-3.5 text-sm font-semibold text-ink transition hover:border-mint hover:text-mint"
-            href="/auth/login"
-          >
-            <LogIn aria-hidden="true" size={16} />
-            Đăng nhập
-          </Link>
+          {isLoggedIn && user ? (
+            <div className="group relative">
+              <button
+                aria-label="Mở menu tài khoản"
+                className="flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-2 text-ink transition hover:border-mint"
+                title="Xem tài khoản"
+                type="button"
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-leaf text-xs font-extrabold text-mint">
+                  {getInitials(user.fullName)}
+                </span>
+                <span className="hidden max-w-28 truncate text-sm font-semibold xl:block">
+                  {user.fullName}
+                </span>
+                <ChevronDown aria-hidden="true" size={15} />
+              </button>
+
+              <div className="invisible absolute right-0 top-full w-72 pt-2 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                <div className="overflow-hidden rounded-lg border border-line bg-white shadow-lift">
+                  <div className="border-b border-line bg-canvas p-4">
+                    <p className="font-extrabold text-ink">{user.fullName}</p>
+                    <p className="mt-1 truncate text-xs text-slate-500">
+                      {user.email ?? user.phone ?? 'Tài khoản đã xác thực'}
+                    </p>
+                  </div>
+                  <nav className="grid gap-1 p-2" aria-label="Menu người dùng">
+                    {userLinks.map(({ label, href, icon: Icon }) => (
+                      <Link
+                        className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-leaf hover:text-mint"
+                        href={href}
+                        key={href}
+                      >
+                        <Icon aria-hidden="true" size={17} />
+                        {label}
+                      </Link>
+                    ))}
+                    <div className="my-1 border-t border-line" />
+                    <button
+                      className="flex items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm font-semibold text-rose-600 transition hover:bg-rose-50"
+                      onClick={handleLogout}
+                      type="button"
+                    >
+                      <LogOut aria-hidden="true" size={17} />
+                      Đăng xuất
+                    </button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Link
+                className="hidden h-10 items-center px-2 text-sm font-semibold text-slate-600 transition hover:text-mint xl:inline-flex"
+                href="/auth/register"
+              >
+                Đăng ký
+              </Link>
+              <Link
+                className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-3.5 text-sm font-semibold text-ink transition hover:border-mint hover:text-mint"
+                href="/auth/login"
+              >
+                <LogIn aria-hidden="true" size={16} />
+                Đăng nhập
+              </Link>
+            </>
+          )}
+
           <Link
             className="inline-flex h-10 items-center gap-2 rounded-lg bg-ink px-4 text-sm font-bold text-white transition hover:bg-mint"
             href="/sell"
@@ -129,20 +221,58 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
                 </Link>
               ))}
               <div className="my-2 border-t border-line" />
-              <Link
-                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
-                href="/account"
-              >
-                <CircleUserRound aria-hidden="true" className="text-mint" size={18} />
-                Tài khoản
-              </Link>
-              <Link
-                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
-                href="/auth/login"
-              >
-                <LogIn aria-hidden="true" className="text-mint" size={18} />
-                Đăng nhập
-              </Link>
+
+              {isLoggedIn && user ? (
+                <>
+                  <div className="flex items-center gap-3 px-3 py-2">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf text-xs font-extrabold text-mint">
+                      {getInitials(user.fullName)}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-bold text-ink">{user.fullName}</span>
+                      <span className="block truncate text-xs text-slate-500">
+                        {user.email ?? user.phone}
+                      </span>
+                    </span>
+                  </div>
+                  {userLinks.map(({ label, href, icon: Icon }) => (
+                    <Link
+                      className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
+                      href={href}
+                      key={href}
+                    >
+                      <Icon aria-hidden="true" className="text-mint" size={18} />
+                      {label}
+                    </Link>
+                  ))}
+                  <button
+                    className="flex items-center gap-3 rounded-lg px-3 py-3 text-left text-sm font-semibold text-rose-600 hover:bg-rose-50"
+                    onClick={handleLogout}
+                    type="button"
+                  >
+                    <LogOut aria-hidden="true" size={18} />
+                    Đăng xuất
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
+                    href="/auth/login"
+                  >
+                    <LogIn aria-hidden="true" className="text-mint" size={18} />
+                    Đăng nhập
+                  </Link>
+                  <Link
+                    className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-ink hover:bg-canvas"
+                    href="/auth/register"
+                  >
+                    <UserPlus aria-hidden="true" className="text-mint" size={18} />
+                    Đăng ký
+                  </Link>
+                </>
+              )}
+
               <Link
                 className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-ink px-4 py-3 text-sm font-bold text-white"
                 href="/sell"
@@ -154,7 +284,6 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
           </div>
         </details>
       </div>
-
     </header>
   );
 }

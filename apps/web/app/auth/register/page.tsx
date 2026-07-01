@@ -1,6 +1,7 @@
-import { ArrowRight, BadgeCheck, Phone, User, UserPlus } from 'lucide-react';
+import { BadgeCheck } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { RegisterForm } from '../../components/AuthForms';
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
@@ -36,58 +37,15 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <form
-            action="/account"
-            className="rounded-lg border border-line bg-white p-6 shadow-soft sm:p-8"
-          >
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-leaf text-mint">
-              <UserPlus aria-hidden="true" size={22} />
-            </div>
-            <h2 className="mt-5 text-2xl font-extrabold text-ink">Đăng ký</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              Chỉ cần thông tin cơ bản để bắt đầu.
-            </p>
-            <label className="mt-6 grid gap-2 text-sm font-bold text-ink">
-              <span className="flex items-center gap-2">
-                <User aria-hidden="true" className="text-slate-400" size={16} />
-                Họ và tên
-              </span>
-              <input
-                autoComplete="name"
-                className="h-12 rounded-lg border border-line bg-canvas px-4 font-normal outline-none focus:border-mint"
-                placeholder="Nguyễn Văn A"
-                required
-              />
-            </label>
-            <label className="mt-4 grid gap-2 text-sm font-bold text-ink">
-              <span className="flex items-center gap-2">
-                <Phone aria-hidden="true" className="text-slate-400" size={16} />
-                Số điện thoại
-              </span>
-              <input
-                autoComplete="tel"
-                className="h-12 rounded-lg border border-line bg-canvas px-4 font-normal outline-none focus:border-mint"
-                inputMode="tel"
-                placeholder="09xx xxx xxx"
-                required
-                type="tel"
-              />
-            </label>
-            <label className="mt-5 flex items-start gap-3 text-xs leading-5 text-slate-500">
-              <input className="mt-1 h-4 w-4 accent-mint" required type="checkbox" />
-              Tôi đồng ý với điều khoản sử dụng và chính sách quyền riêng tư.
-            </label>
-            <button className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-mint px-5 text-sm font-bold text-white transition hover:bg-ink">
-              Tạo tài khoản
-              <ArrowRight aria-hidden="true" size={17} />
-            </button>
+          <div>
+            <RegisterForm />
             <p className="mt-5 text-center text-sm text-slate-500">
               Đã có tài khoản?{' '}
               <Link className="font-bold text-mint hover:underline" href="/auth/login">
                 Đăng nhập
               </Link>
             </p>
-          </form>
+          </div>
         </div>
       </section>
       <SiteFooter />
