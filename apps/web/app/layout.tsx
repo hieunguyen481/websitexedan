@@ -2,9 +2,13 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Xe Dan Voi Dan',
+  title: {
+    default: 'Xe Dân Với Dân | Mua bán xe cũ đã kiểm định',
+    template: '%s | Xe Dân Với Dân',
+  },
   description:
-    'Nen tang mua ban xe cu co kiem dinh, dat coc an toan va ho tro sang ten.',
+    'Nền tảng mua bán xe cũ có kiểm định, đặt cọc an toàn và hỗ trợ sang tên.',
+  metadataBase: new URL('https://xedanvoidan.vn'),
 };
 
 export default function RootLayout({

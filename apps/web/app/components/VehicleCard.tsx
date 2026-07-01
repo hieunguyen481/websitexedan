@@ -1,5 +1,15 @@
 import type { Vehicle } from '@xedan/shared';
-import { ArrowRight, BadgeCheck, Fuel, Gauge, MapPin, Settings, Users } from 'lucide-react';
+import {
+  ArrowUpRight,
+  BadgeCheck,
+  Fuel,
+  Gauge,
+  Heart,
+  MapPin,
+  Settings2,
+} from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { formatPrice, statusLabel } from '../utils';
 
 type VehicleCardProps = {
@@ -9,75 +19,80 @@ type VehicleCardProps = {
 
 export function VehicleCard({ vehicle, compact = false }: VehicleCardProps) {
   return (
-    <article className="group overflow-hidden rounded-md border border-line bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-soft">
-      <a href={`/vehicles/${vehicle.slug}`}>
-        <div
-          className="relative aspect-[16/10] bg-cover bg-center"
-          style={{ backgroundImage: `url(${vehicle.imageUrl})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
-          <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-3">
-            <span className="rounded-md bg-white/95 px-3 py-2 text-xs font-black text-ink">
-              <BadgeCheck aria-hidden="true" className="mr-1 inline" size={14} strokeWidth={2.5} />
-              {statusLabel(vehicle.status)}
-            </span>
-            <span className="rounded-md bg-mint px-3 py-2 text-xs font-black text-white">
-              {vehicle.inspection.score}/100
-            </span>
-          </div>
-          <div className="absolute bottom-4 left-4 right-4">
-            <p className="text-xs font-bold uppercase tracking-wide text-white/80">
+    <article className="group overflow-hidden rounded-lg border border-line bg-white transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lift">
+      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+        <Link href={`/vehicles/${vehicle.slug}`}>
+          <Image
+            alt={vehicle.name}
+            className="object-cover transition duration-500 group-hover:scale-[1.025]"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+            src={vehicle.imageUrl}
+          />
+        </Link>
+        <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-3">
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-white/95 px-2.5 py-1.5 text-xs font-bold text-ink shadow-sm backdrop-blur">
+            <BadgeCheck aria-hidden="true" className="text-mint" size={14} />
+            {statusLabel(vehicle.status)}
+          </span>
+          <button
+            aria-label={`Lưu ${vehicle.name}`}
+            className="pointer-events-auto flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-slate-600 shadow-sm transition hover:text-rose-600"
+            type="button"
+          >
+            <Heart aria-hidden="true" size={17} />
+          </button>
+        </div>
+      </div>
+
+      <div className="p-4 sm:p-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <p className="flex items-center gap-1.5 text-xs font-semibold text-slate-500">
+              <MapPin aria-hidden="true" size={14} />
               {vehicle.location}
             </p>
-            <h3 className="mt-1 text-xl font-black text-white">{vehicle.name}</h3>
+            <Link href={`/vehicles/${vehicle.slug}`}>
+              <h3 className="mt-2 line-clamp-2 text-lg font-extrabold leading-6 text-ink transition group-hover:text-mint">
+                {vehicle.name}
+              </h3>
+            </Link>
           </div>
-        </div>
-      </a>
-
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-sm text-slate-500">
-              <MapPin aria-hidden="true" className="mr-1 inline" size={14} strokeWidth={2.3} />
-              {vehicle.year} - {vehicle.mileage}
-            </p>
-            <p className="mt-2 text-2xl font-black text-mint">
-              {formatPrice(vehicle.price)}
-            </p>
-          </div>
-          <span className="rounded-md bg-sky px-3 py-2 text-xs font-bold text-ink">
-            {vehicle.inspection.result}
+          <span className="shrink-0 rounded-md bg-leaf px-2.5 py-1.5 text-xs font-extrabold text-mint">
+            {vehicle.inspection.score}/100
           </span>
         </div>
 
+        <p className="mt-3 text-2xl font-extrabold text-ink">{formatPrice(vehicle.price)}</p>
+
         {!compact && (
-          <p className="mt-4 text-sm leading-6 text-slate-600">{vehicle.summary}</p>
+          <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600">
+            {vehicle.summary}
+          </p>
         )}
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {[
-            { label: vehicle.transmission, icon: Settings },
-            { label: vehicle.fuel, icon: Fuel },
-            { label: `${vehicle.seats} cho`, icon: Users },
-          ].map(({ label, icon: Icon }) => (
-            <span
-              className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-2 text-xs font-bold text-ink"
-              key={label}
-            >
-              <Icon aria-hidden="true" size={14} strokeWidth={2.4} />
-              {label}
-            </span>
-          ))}
+        <div className="mt-4 grid grid-cols-3 border-y border-line py-3 text-xs text-slate-600">
+          <span className="flex items-center gap-1.5">
+            <Gauge aria-hidden="true" size={15} />
+            {vehicle.mileage}
+          </span>
+          <span className="flex items-center justify-center gap-1.5 border-x border-line">
+            <Settings2 aria-hidden="true" size={15} />
+            {vehicle.transmission}
+          </span>
+          <span className="flex items-center justify-end gap-1.5">
+            <Fuel aria-hidden="true" size={15} />
+            {vehicle.fuel}
+          </span>
         </div>
 
-        <a
-          className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-ink px-4 py-3 text-sm font-bold text-white transition group-hover:bg-mint"
+        <Link
+          className="mt-4 flex items-center justify-between text-sm font-bold text-ink transition group-hover:text-mint"
           href={`/vehicles/${vehicle.slug}`}
         >
-          <Gauge aria-hidden="true" size={17} strokeWidth={2.5} />
-          Xem ho so xe
-          <ArrowRight aria-hidden="true" size={17} strokeWidth={2.5} />
-        </a>
+          Xem hồ sơ kiểm định
+          <ArrowUpRight aria-hidden="true" size={18} />
+        </Link>
       </div>
     </article>
   );

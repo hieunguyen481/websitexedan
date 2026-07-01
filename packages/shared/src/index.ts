@@ -13,6 +13,7 @@ export type Vehicle = {
   location: string;
   transmission: string;
   fuel: string;
+  bodyStyle: string;
   seats: number;
   color: string;
   plateArea: string;
@@ -21,11 +22,11 @@ export type Vehicle = {
   highlights: string[];
   inspection: {
     score: number;
-    result: 'Dat' | 'Can luu y';
+    result: 'Đạt' | 'Cần lưu ý';
     checkedAt: string;
     items: Array<{
       label: string;
-      status: 'Tot' | 'Can theo doi';
+      status: 'Tốt' | 'Cần theo dõi';
     }>;
   };
 };
@@ -41,30 +42,30 @@ export const vehicles: Vehicle[] = [
     mileage: '42.000 km',
     price: 468000000,
     status: 'available',
-    location: 'Cau Giay, Ha Noi',
-    transmission: 'Tu dong',
-    fuel: 'Xang',
+    location: 'Cầu Giấy, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Xăng',
+    bodyStyle: 'Sedan',
     seats: 5,
-    color: 'Trang ngoc trai',
-    plateArea: 'Ha Noi',
-    imageUrl:
-      'https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80',
+    color: 'Trắng ngọc trai',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/toyota-vios.webp',
     summary:
-      'Sedan tiet kiem, ho so ro rang, phu hop gia dinh va nhu cau di lai hang ngay.',
+      'Sedan tiết kiệm, hồ sơ rõ ràng, phù hợp gia đình và nhu cầu đi lại hằng ngày.',
     highlights: [
-      'Mot chu tu dau, bao duong hang',
-      'Noi that sach, dieu hoa sau tot',
-      'Bao cao kiem dinh 32 hang muc',
+      'Một chủ từ đầu, bảo dưỡng hãng',
+      'Nội thất sạch, điều hòa sâu tốt',
+      'Báo cáo kiểm định 32 hạng mục',
     ],
     inspection: {
       score: 91,
-      result: 'Dat',
+      result: 'Đạt',
       checkedAt: '18/06/2026',
       items: [
-        { label: 'Dong co va hop so', status: 'Tot' },
-        { label: 'Khung gam', status: 'Tot' },
-        { label: 'Son ngoai that', status: 'Can theo doi' },
-        { label: 'Giay to phap ly', status: 'Tot' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Khung gầm', status: 'Tốt' },
+        { label: 'Sơn ngoại thất', status: 'Cần theo dõi' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
       ],
     },
   },
@@ -78,30 +79,30 @@ export const vehicles: Vehicle[] = [
     mileage: '35.000 km',
     price: 545000000,
     status: 'available',
-    location: 'Thanh Xuan, Ha Noi',
-    transmission: 'Tu dong',
-    fuel: 'Xang',
+    location: 'Thanh Xuân, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Xăng',
+    bodyStyle: 'Sedan',
     seats: 5,
-    color: 'Do',
-    plateArea: 'Ha Noi',
-    imageUrl:
-      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80',
+    color: 'Đỏ',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/honda-city.webp',
     summary:
-      'Ngoai that the thao, van hanh on dinh, da qua kiem dinh 30+ hang muc.',
+      'Ngoại thất thể thao, vận hành ổn định, đã qua kiểm định hơn 30 hạng mục.',
     highlights: [
-      'Ban RS, trang bi an toan day du',
-      'Lop con day, mam zin theo xe',
-      'Co lich su bao duong ro rang',
+      'Bản RS, trang bị an toàn đầy đủ',
+      'Lốp còn dày, mâm nguyên bản',
+      'Có lịch sử bảo dưỡng rõ ràng',
     ],
     inspection: {
       score: 94,
-      result: 'Dat',
+      result: 'Đạt',
       checkedAt: '20/06/2026',
       items: [
-        { label: 'Dong co va hop so', status: 'Tot' },
-        { label: 'He thong dien', status: 'Tot' },
-        { label: 'Noi that', status: 'Tot' },
-        { label: 'Giay to phap ly', status: 'Tot' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Hệ thống điện', status: 'Tốt' },
+        { label: 'Nội thất', status: 'Tốt' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
       ],
     },
   },
@@ -115,30 +116,30 @@ export const vehicles: Vehicle[] = [
     mileage: '58.000 km',
     price: 515000000,
     status: 'reserved',
-    location: 'Nam Tu Liem, Ha Noi',
-    transmission: 'Tu dong',
-    fuel: 'Xang',
+    location: 'Nam Từ Liêm, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Xăng',
+    bodyStyle: 'Sedan',
     seats: 5,
-    color: 'Xam',
-    plateArea: 'Ha Noi',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=1400&q=80',
+    color: 'Xám',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/mazda-3.webp',
     summary:
-      'Thiet ke hien dai, noi that gon dep, bao cao kiem dinh minh bach.',
+      'Thiết kế hiện đại, nội thất gọn đẹp, báo cáo kiểm định minh bạch.',
     highlights: [
-      'Khoang lai dep, man hinh trung tam',
-      'Gam chac, khong co dau hieu dam dung lon',
-      'Dang co khach dat lich xem xe',
+      'Khoang lái đẹp, màn hình trung tâm',
+      'Gầm chắc, không có dấu hiệu đâm đụng lớn',
+      'Đang có khách đặt lịch xem xe',
     ],
     inspection: {
       score: 88,
-      result: 'Can luu y',
+      result: 'Cần lưu ý',
       checkedAt: '16/06/2026',
       items: [
-        { label: 'Dong co va hop so', status: 'Tot' },
-        { label: 'Khung gam', status: 'Tot' },
-        { label: 'Lop va phanh', status: 'Can theo doi' },
-        { label: 'Giay to phap ly', status: 'Tot' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Khung gầm', status: 'Tốt' },
+        { label: 'Lốp và phanh', status: 'Cần theo dõi' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
       ],
     },
   },
@@ -152,30 +153,30 @@ export const vehicles: Vehicle[] = [
     mileage: '28.000 km',
     price: 628000000,
     status: 'available',
-    location: 'Long Bien, Ha Noi',
-    transmission: 'Tu dong',
-    fuel: 'Xang',
+    location: 'Long Biên, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Xăng',
+    bodyStyle: 'SUV',
     seats: 5,
     color: 'Cam',
-    plateArea: 'Ha Noi',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1400&q=80',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/kia-seltos.webp',
     summary:
-      'SUV do thi gon, khoang ngoi rong, phu hop gia dinh tre va di pho.',
+      'SUV đô thị gọn, khoang ngồi rộng, phù hợp gia đình trẻ và đi phố.',
     highlights: [
-      'Camera lui, cam bien day du',
-      'Noi that con moi, mui xe sach',
-      'Kiem dinh dat, san sang giao dich',
+      'Camera lùi, cảm biến đầy đủ',
+      'Nội thất còn mới, mùi xe sạch',
+      'Kiểm định đạt, sẵn sàng giao dịch',
     ],
     inspection: {
       score: 92,
-      result: 'Dat',
+      result: 'Đạt',
       checkedAt: '19/06/2026',
       items: [
-        { label: 'Dong co va hop so', status: 'Tot' },
-        { label: 'Khung gam', status: 'Tot' },
-        { label: 'He thong an toan', status: 'Tot' },
-        { label: 'Giay to phap ly', status: 'Tot' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Khung gầm', status: 'Tốt' },
+        { label: 'Hệ thống an toàn', status: 'Tốt' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
       ],
     },
   },
@@ -189,67 +190,141 @@ export const vehicles: Vehicle[] = [
     mileage: '64.000 km',
     price: 705000000,
     status: 'available',
-    location: 'Hoang Mai, Ha Noi',
-    transmission: 'Tu dong',
-    fuel: 'Dau',
+    location: 'Hoàng Mai, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Dầu',
+    bodyStyle: 'Bán tải',
     seats: 5,
-    color: 'Den',
-    plateArea: 'Ha Noi',
-    imageUrl:
-      'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1400&q=80',
+    color: 'Đen',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/ford-ranger.webp',
     summary:
-      'Ban tai manh, phu hop di tinh va cong viec, lich su su dung ro rang.',
+      'Bán tải mạnh, phù hợp đi tỉnh và công việc, lịch sử sử dụng rõ ràng.',
     highlights: [
-      'May dau khoe, sang so muot',
-      'Thung xe da lap nap cuon',
-      'Co ho so bao duong gan nhat',
+      'Máy dầu khỏe, sang số mượt',
+      'Thùng xe đã lắp nắp cuộn',
+      'Có hồ sơ bảo dưỡng gần nhất',
     ],
     inspection: {
       score: 89,
-      result: 'Dat',
+      result: 'Đạt',
       checkedAt: '15/06/2026',
       items: [
-        { label: 'Dong co va hop so', status: 'Tot' },
-        { label: 'He thong treo', status: 'Can theo doi' },
-        { label: 'Khung gam', status: 'Tot' },
-        { label: 'Giay to phap ly', status: 'Tot' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Hệ thống treo', status: 'Cần theo dõi' },
+        { label: 'Khung gầm', status: 'Tốt' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
       ],
     },
   },
   {
     id: 'hyundai-accent-2021',
     slug: 'hyundai-accent-2021-dac-biet-ha-noi',
-    name: 'Hyundai Accent 2021 Dac Biet',
+    name: 'Hyundai Accent 2021 Đặc Biệt',
     brand: 'Hyundai',
     model: 'Accent',
     year: 2021,
     mileage: '39.000 km',
     price: 455000000,
     status: 'sold',
-    location: 'Ha Dong, Ha Noi',
-    transmission: 'Tu dong',
-    fuel: 'Xang',
+    location: 'Hà Đông, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Xăng',
+    bodyStyle: 'Sedan',
     seats: 5,
-    color: 'Bac',
-    plateArea: 'Ha Noi',
-    imageUrl:
-      'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1400&q=80',
+    color: 'Bạc',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/hyundai-accent.webp',
     summary:
-      'Mau sedan de dung, chi phi hop ly, giao dich mau da hoan tat qua san.',
+      'Mẫu sedan dễ dùng, chi phí hợp lý, giao dịch mẫu đã hoàn tất qua sàn.',
     highlights: [
-      'Gia mem trong phan khuc',
-      'Noi that duoc giu gin tot',
-      'Giao dich thanh cong qua escrow',
+      'Giá mềm trong phân khúc',
+      'Nội thất được giữ gìn tốt',
+      'Giao dịch thành công qua escrow',
     ],
     inspection: {
       score: 90,
-      result: 'Dat',
+      result: 'Đạt',
       checkedAt: '10/06/2026',
       items: [
-        { label: 'Dong co va hop so', status: 'Tot' },
-        { label: 'Noi that', status: 'Tot' },
-        { label: 'Son ngoai that', status: 'Can theo doi' },
-        { label: 'Giay to phap ly', status: 'Tot' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Nội thất', status: 'Tốt' },
+        { label: 'Sơn ngoại thất', status: 'Cần theo dõi' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
+      ],
+    },
+  },
+  {
+    id: 'vinfast-vf-e34-2022',
+    slug: 'vinfast-vf-e34-2022-plus-ha-noi',
+    name: 'VinFast VF e34 2022 Plus',
+    brand: 'VinFast',
+    model: 'VF e34',
+    year: 2022,
+    mileage: '31.000 km',
+    price: 498000000,
+    status: 'available',
+    location: 'Tây Hồ, Hà Nội',
+    transmission: 'Một cấp',
+    fuel: 'Điện',
+    bodyStyle: 'SUV điện',
+    seats: 5,
+    color: 'Xanh',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/vinfast-vfe34.webp',
+    summary:
+      'SUV điện đô thị, chi phí vận hành thấp, phù hợp người dùng muốn chuyển sang xe xanh.',
+    highlights: [
+      'Pin còn bảo hành, lịch sử sạc rõ',
+      'Khoang lái rộng, màn hình trung tâm lớn',
+      'Kiểm tra riêng hệ thống điện áp cao',
+    ],
+    inspection: {
+      score: 93,
+      result: 'Đạt',
+      checkedAt: '21/06/2026',
+      items: [
+        { label: 'Pin và hệ thống sạc', status: 'Tốt' },
+        { label: 'Động cơ điện', status: 'Tốt' },
+        { label: 'Khung gầm', status: 'Tốt' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
+      ],
+    },
+  },
+  {
+    id: 'toyota-corolla-cross-hybrid-2021',
+    slug: 'toyota-corolla-cross-2021-hybrid-ha-noi',
+    name: 'Toyota Corolla Cross 2021 Hybrid',
+    brand: 'Toyota',
+    model: 'Corolla Cross',
+    year: 2021,
+    mileage: '46.000 km',
+    price: 735000000,
+    status: 'available',
+    location: 'Ba Đình, Hà Nội',
+    transmission: 'Tự động',
+    fuel: 'Hybrid',
+    bodyStyle: 'SUV hybrid',
+    seats: 5,
+    color: 'Trắng',
+    plateArea: 'Hà Nội',
+    imageUrl: '/images/vehicles/toyota-cross.webp',
+    summary:
+      'SUV hybrid tiết kiệm, trang bị an toàn tốt, phù hợp gia đình cần xe bền bỉ.',
+    highlights: [
+      'Hệ hybrid hoạt động ổn định',
+      'Gói an toàn Toyota Safety Sense',
+      'Nội thất sạch, lịch sử bảo dưỡng đầy đủ',
+    ],
+    inspection: {
+      score: 95,
+      result: 'Đạt',
+      checkedAt: '22/06/2026',
+      items: [
+        { label: 'Hệ thống hybrid', status: 'Tốt' },
+        { label: 'Động cơ và hộp số', status: 'Tốt' },
+        { label: 'Hệ thống an toàn', status: 'Tốt' },
+        { label: 'Giấy tờ pháp lý', status: 'Tốt' },
       ],
     },
   },
@@ -257,28 +332,60 @@ export const vehicles: Vehicle[] = [
 
 export const featuredVehicles = vehicles.slice(0, 3);
 
+export const categoryLinks = [
+  {
+    title: 'Hãng xe',
+    href: '/brands',
+    description: 'Toyota, Honda, Mazda, VinFast và các hãng phổ biến.',
+  },
+  {
+    title: 'Xe điện',
+    href: '/fuel/electric',
+    description: 'Xe điện, hybrid và các mẫu tiết kiệm năng lượng.',
+  },
+  {
+    title: 'Xe xăng/dầu',
+    href: '/fuel/gasoline',
+    description: 'Sedan, SUV, bán tải dùng động cơ xăng hoặc dầu.',
+  },
+  {
+    title: 'Đăng nhập',
+    href: '/auth/login',
+    description: 'Theo dõi lịch xem xe, xe yêu thích và giao dịch.',
+  },
+];
+
+export const bodyStyleLinks = [
+  { title: 'Sedan', href: '/vehicles?style=sedan' },
+  { title: 'SUV', href: '/vehicles?style=suv' },
+  { title: 'Xe điện', href: '/fuel/electric' },
+  { title: 'Bán tải', href: '/vehicles?style=ban-tai' },
+  { title: 'Hybrid', href: '/fuel/electric#hybrid' },
+  { title: 'Dưới 500 triệu', href: '/vehicles?price=under-500' },
+];
+
 export const trustStats = [
-  { value: '30+', label: 'Hang muc kiem dinh' },
-  { value: '2h', label: 'Phan hoi lich hen' },
-  { value: '3', label: 'Buoc giao dich chinh' },
+  { value: '30+', label: 'Hạng mục kiểm định' },
+  { value: '< 2h', label: 'Phản hồi lịch hẹn' },
+  { value: '1:1', label: 'Tư vấn xuyên suốt' },
 ];
 
 export const processSteps = [
   {
-    title: 'Dang ky',
-    description: 'Nguoi ban gui thong tin xe, anh so bo va khung gio ranh.',
+    title: 'Đăng ký',
+    description: 'Người bán gửi thông tin xe, ảnh sơ bộ và khung giờ rảnh.',
   },
   {
-    title: 'Kiem dinh',
-    description: 'Ky thuat vien kiem tra xe, chup anh va lap bao cao chi tiet.',
+    title: 'Kiểm định',
+    description: 'Kỹ thuật viên kiểm tra xe, chụp ảnh và lập báo cáo chi tiết.',
   },
   {
-    title: 'Len san',
-    description: 'Tin dang duoc duyet, toi uu mo ta va cong khai cho nguoi mua.',
+    title: 'Lên sàn',
+    description: 'Tin đăng được duyệt, chuẩn hóa mô tả và công khai cho người mua.',
   },
   {
-    title: 'Giao dich',
-    description: 'Dat coc, ban giao xe, theo doi sang ten va giai ngan an toan.',
+    title: 'Giao dịch',
+    description: 'Đặt cọc, bàn giao xe, theo dõi sang tên và giải ngân an toàn.',
   },
 ];
 
@@ -288,4 +395,16 @@ export function findVehicleBySlug(slug: string) {
 
 export function getVehicleBrands() {
   return Array.from(new Set(vehicles.map((vehicle) => vehicle.brand)));
+}
+
+export function getVehiclesByFuelGroup(group: 'electric' | 'gasoline') {
+  if (group === 'electric') {
+    return vehicles.filter((vehicle) => ['Điện', 'Hybrid'].includes(vehicle.fuel));
+  }
+
+  return vehicles.filter((vehicle) => ['Xăng', 'Dầu'].includes(vehicle.fuel));
+}
+
+export function getVehiclesByBrand(brand: string) {
+  return vehicles.filter((vehicle) => vehicle.brand === brand);
 }

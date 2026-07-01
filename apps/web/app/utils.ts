@@ -10,12 +10,12 @@ export function formatPrice(value: number) {
 
 export function statusLabel(status: string) {
   if (status === 'reserved') {
-    return 'Dang giu cho';
+    return 'Đang giữ chỗ';
   }
 
   if (status === 'sold') {
-    return 'Da ban';
+    return 'Đã bán';
   }
 
-  return 'San sang xem xe';
+  return 'Sẵn sàng xem xe';
 }

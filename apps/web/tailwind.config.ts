@@ -5,14 +5,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#17202A',
-        mint: '#1F9D7A',
-        sun: '#F5B84B',
-        sky: '#EAF6FF',
-        line: '#DCE6EA',
+        ink: '#17211D',
+        mint: '#087A5B',
+        leaf: '#DFF4EA',
+        sun: '#F4B740',
+        sky: '#EDF6F8',
+        line: '#DDE5E1',
+        canvas: '#F7F9F8',
       },
       boxShadow: {
-        soft: '0 16px 48px rgba(23, 32, 42, 0.08)',
+        soft: '0 18px 50px rgba(23, 33, 29, 0.09)',
+        lift: '0 12px 30px rgba(23, 33, 29, 0.12)',
       },
     },
   },
