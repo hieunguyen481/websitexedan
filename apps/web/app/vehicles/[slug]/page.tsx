@@ -218,7 +218,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             </section>
           </div>
 
-          <aside className="h-fit rounded-lg border border-line bg-canvas p-5 lg:sticky lg:top-36">
+          <aside className="h-fit rounded-lg border border-line bg-canvas p-5 lg:sticky lg:top-28">
             <p className="text-sm font-bold text-ink">Bạn quan tâm chiếc xe này?</p>
             <p className="mt-2 text-sm leading-6 text-slate-600">
               Chọn thời gian thuận tiện, tư vấn viên sẽ xác nhận lịch và địa

@@ -183,7 +183,7 @@ export function VehicleExplorer({
 
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-9 lg:grid-cols-[220px_1fr]">
         <aside className="hidden lg:block">
-          <div className="sticky top-36">
+          <div className="sticky top-28">
             <h2 className="mb-5 flex items-center gap-2 font-extrabold text-ink">
               <SlidersHorizontal aria-hidden="true" size={19} />
               Bộ lọc

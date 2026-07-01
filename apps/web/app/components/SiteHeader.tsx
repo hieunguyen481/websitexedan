@@ -1,11 +1,9 @@
-import { categoryLinks } from '@xedan/shared';
 import {
   BadgeCheck,
   BatteryCharging,
   CarFront,
   ChevronDown,
   ClipboardCheck,
-  Fuel,
   LogIn,
   Menu,
   Search,
@@ -23,8 +21,6 @@ const mainLinks = [
   { label: 'Hãng xe', href: '/brands', icon: CarFront },
   { label: 'Xe điện', href: '/fuel/electric', icon: BatteryCharging },
 ];
-
-const categoryIcons = [CarFront, BatteryCharging, Fuel, LogIn];
 
 export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
   return (
@@ -143,24 +139,6 @@ export function SiteHeader({ tone = 'light' }: SiteHeaderProps) {
         </details>
       </div>
 
-      <nav className="border-t border-line/70 bg-white" aria-label="Danh mục nhanh">
-        <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-5 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {categoryLinks.map((link, index) => {
-            const Icon = categoryIcons[index] ?? Search;
-
-            return (
-              <Link
-                className="inline-flex min-w-fit items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-leaf hover:text-mint"
-                href={link.href}
-                key={link.href}
-              >
-                <Icon aria-hidden="true" size={14} strokeWidth={2.2} />
-                {link.title}
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
     </header>
   );
 }
